@@ -88,8 +88,12 @@ phonebook/
    ```bash
    go run main.go
    ```
+   or
+   ```bash
+   go run .
+   ```
 
-5. **Access the application**
+6. **Access the application**
    Open your browser and navigate to `http://localhost:8080`
 
 ## 🎓 Key Learning Concepts
