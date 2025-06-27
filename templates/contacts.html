@@ -1,0 +1,62 @@
+{{ define "content/contacts" }}
+{{ $username := .LoggedUserName }}
+
+<div class="row mb-3">
+    <div class="col-2">
+        <h1>Contacts</h1>
+    </div>
+    <div class="col-8 text-center">
+        {{ if $username }}
+            <a href="/contacts/new" class="btn btn-success">Add Contact</a>
+        {{ end }}
+    </div>
+    <div class="col-2">
+        <form action="/contacts" method="get">
+            <div class="input-group">
+                <input type="text" name="q" placeholder="Search..." class="form-control" />
+                <button class="btn btn-info" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Debug info -->
+<div class="alert alert-info">
+    Number of contacts retrieved: {{ len .Data }}
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>In Use</th>
+            <th>&nbsp</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range .Data }}
+        <tr>
+            <td>{{ .Name }}</td>
+            <td>{{ .Phone }}</td>
+            <td>
+                {{ if eq .InUse 1 }}
+                <span class="badge bg-success">Yes</span>
+                {{ else }}
+                <span class="badge bg-secondary">No</span>
+                {{ end }}
+            </td>
+            <td>
+                {{ if eq .InUse 1 }}
+                    {{ if $username }}
+                        <a href="/contacts/edit?id={{ .ID }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="/contacts/delete?id={{ .ID }}" class="btn btn-sm btn-danger"
+                            onclick="return confirm('Delete this contact?');">Delete</a>
+                    {{ end }}
+                {{ end }}
+            </td>
+        </tr>
+        {{ end }}
+    </tbody>
+</table>
+{{ end }}

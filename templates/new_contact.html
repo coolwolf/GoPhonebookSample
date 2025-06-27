@@ -1,0 +1,14 @@
+{{ define "content/contacts/new" }}
+<h1>Add Contact</h1>
+<form action="/contacts/create" method="post" class="mt-3">
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Phone</label>
+        <input type="text" name="phone" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Contact</button>
+</form>
+{{ end }}
